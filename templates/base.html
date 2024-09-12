@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta tags SEO -->
+    <title>{% block title %}Borsoi Gás{% endblock %}</title>
+    <meta name="description" content="{% block description %}A Borsoi Gás é líder na distribuição de gás de cozinha nos estados do Maranhão e Pará. Oferecemos produtos de qualidade e atendimento diferenciado há mais de 20 anos.{% endblock %}">
+    <meta name="keywords" content="gás de cozinha, distribuição de gás, Maranhão, Pará, Borsoi Gás">
+    <meta name="author" content="Borsoi Gás">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.borsoigas.com.br/">
+    <meta property="og:title" content="Borsoi Gás - Distribuição de Gás de Cozinha no Maranhão e Pará">
+    <meta property="og:description" content="Líder na distribuição de gás de cozinha nos estados do Maranhão e Pará. Qualidade e confiança há mais de 20 anos.">
+    <meta property="og:image" content="https://www.borsoigas.com.br/static/img/logo-borsoi-gas.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.borsoigas.com.br/">
+    <meta property="twitter:title" content="Borsoi Gás - Distribuição de Gás de Cozinha no Maranhão e Pará">
+    <meta property="twitter:description" content="Líder na distribuição de gás de cozinha nos estados do Maranhão e Pará. Qualidade e confiança há mais de 20 anos.">
+    <meta property="twitter:image" content="https://www.borsoigas.com.br/static/img/logo-borsoi-gas.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.borsoigas.com.br/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'SEU_PIXEL_ID');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=SEU_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% include 'header.html' %}
+    {% block components %}{% endblock components %}
+    {% include 'footer.html' %}
+    <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+    <script src="{{url_for('static',filename='js/carousel.js')}}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

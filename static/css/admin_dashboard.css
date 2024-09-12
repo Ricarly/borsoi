@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #b52828;
+    --secondary-color: #ffc107;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.titulo-dash,.titulo-2-dash {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.titulo-dash {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    word-break: break-word; /* Permite que o título quebre em várias linhas */
+    hyphens: auto; /* Adiciona hifens quando necessário */
+    max-width: 100%; /* Garante que o título não ultrapasse a largura do container */
+}
+
+.titulo-2-dash {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+label {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(181, 40, 40, 0.2);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[type="submit"]:hover {
+    background-color: #8e2020;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] i {
+    margin-right: 8px;
+}
+
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flash-message {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .admin-container {
+        width: 95%;
+    }
+    
+    .titulo-dash {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-container {
+        margin: 4rem auto;
+    }
+    
+    .titulo-dash {
+        font-size: 2rem;
+    }
+    
+    .titulo-2-dash {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 1.5rem;
+        margin: 4rem auto;
+    }
+
+    .titulo-dash {
+        font-size: 1.8rem;
+    }
+
+    .titulo-2-dash {
+        font-size: 1.3rem;
+    }
+
+    input[type="text"], textarea {
+        font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container {
+        width: 100%;
+        border-radius: 0;
+        padding: 1rem;
+        margin: 4rem auto;
+    }
+
+    .titulo-dash {
+        font-size: 1.5rem;
+    }
+
+    .titulo-2-dash {
+        font-size: 1.2rem;
+    }
+
+    input[type="text"], textarea {
+        padding: 0.6rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .titulo-dash {
+        font-size: 1.3rem;
+    }
+    .admin-container{
+        margin: 4rem auto;
+    }
+}
+/* Adicione estas regras no final do arquivo admin_dashboard.css */
+
+@media (pointer: coarse) {
+    /* Estilos para dispositivos touch */
+    
+    input[type="text"], textarea, button[type="submit"] {
+        font-size: 16px; /* Previne zoom em iOS */
+        padding: 12px;
+    }
+
+    button[type="submit"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .admin-container {
+        padding: 1.5rem;
+    }
+
+    /* Aumenta o espaçamento entre elementos para evitar toques acidentais */
+    form {
+        gap: 2rem;
+    }
+
+    /* Aumentar área de toque para ícones */
+    .fas {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

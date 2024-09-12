@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block components %}
+    <div class="progress-bar"></div>
+    <section  class="chamada">
+        <main  class="chamada-content">
+            <h1  data-aos-duration="2000" data-aos='fade-right'>{{ conteudo_home.titulo }} <br> <span>{{ conteudo_home.subtitulo }}</span></h1> 
+            <p  data-aos-duration="2000" data-aos="fade-left">{{ conteudo_home.paragrafo }}</p>
+            <div data-aos-delay="1000" data-aos-duration="1000" data-aos="zoom-in-up" class="btn-chamada">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=5599991551213&text=Ol%C3%A1,%20vim%20pelo%20link%20do%20site,%20quero%20trocar%20meu%20g%C3%A1s%20e%20garantir%20meu%20brinde%20especial." class="btn-fale-conosco">
+                    {{ conteudo_home.texto_botao_fale_conosco }}
+                    <i class="fas fa-comments"></i>
+                </a>
+            </div>
+        </main>
+    </section>
+    <div style="width: 100%; background-color:black;"></div>
+
+    <section class="sobre-empresa">
+        <h2 data-aos-easing="linear"
+        data-aos-duration="700" data-aos="fade-up">Sustentabilidade</h2>
+        <p data-aos-easing="linear"
+        data-aos-duration="700"  data-aos="fade-up">>Na Borsoi Gás, estamos comprometidos com a sustentabilidade e o
+            futuro do nosso planeta. O gás de cozinha que oferecemos é uma 
+            fonte de energia limpa e eficiente, que contribui para a redução 
+            de emissões de carbono em comparação com outras fontes de combustíveis. Além disso, 
+            trabalhamos constantemente para otimizar nossos processos logísticos, garantindo 
+            uma distribuição mais sustentável e reduzindo nosso impacto ambiental. 
+            Acreditamos que cuidar do meio ambiente é parte fundamental do nosso compromisso com 
+            a qualidade de vida de nossos clientes e comunidades.</p>
+        <h2 data-aos-easing="linear"
+        data-aos-duration="700"  data-aos="fade-up">A Importância do Uso do 
+            Borsoi Gás na Sua Casa</h2>
+        <p data-aos-easing="linear"
+        data-aos-duration="700"  data-aos="fade-up">O uso do gás da Borsoi Gás em sua casa é sinônimo de segurança,
+            eficiência e conforto. Nosso gás de cozinha é cuidadosamente selecionado 
+            e distribuído para garantir uma queima limpa e econômica, proporcionando 
+            a tranquilidade que sua família merece. Além disso, nossa equipe está sempre 
+            pronta para oferecer suporte rápido e confiável, 
+            garantindo que você nunca fique sem energia para preparar suas refeições. 
+            Com a Borsoi Gás, você tem a certeza de estar utilizando um produto de alta 
+            qualidade, pensado para o bem-estar e a praticidade do seu lar.</p>
+        <h2 data-aos-easing="linear"
+        data-aos-duration="700"  data-aos="fade-up">Nossa História</h2>
+        <p data-aos-easing="linear"
+        data-aos-duration="700"  data-aos="fade-up">Com mais de vinte anos de experiência no 
+            mercado, a Borsoi Gás se orgulha de ser 
+            líder na distribuição de gás de cozinha nos 
+            estados do Maranhão e Pará. Desde o início de nossa 
+            trajetória, buscamos oferecer produtos de qualidade e 
+            um atendimento diferenciado, conquistando a confiança e a
+            preferência de nossos clientes. Nossa dedicação e compromisso 
+            nos permitiram crescer e nos tornar uma referência na região, sempre
+            priorizando a segurança, eficiência e satisfação 
+            de quem confia em nosso trabalho.</p>
+        <div class="empresa-info">
+            <div class="mapa-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15885.67142538483!2d-47.4712922!3d-5.5048122!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92c55fc318bf4711%3A0x890c366837904c0a!2sBorsoi%20G%C3%A1s!5e0!3m2!1spt-BR!2sbr!4v1725978318083!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="endereco-container">
+                <div class="icone-localizacao"></div>
+                <p class="endereco">Marginal BR-010, 12 - Jardim Tropical, Imperatriz - MA, 65910-680</p>
+                
+                <a href="https://maps.app.goo.gl/QFjJjDfTwhGwcbzY8" class="btn-localizacao" target="_blank">
+                    Google maps
+                    <span class="icone-mapa"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="opiniao-revendedores">
+        <h2 class="titulo-depoimentos">Opinião dos Nossos Revendedores</h2>
+        <div data-aos="fade-up"
+        data-aos-anchor-placement="center-bottom" data-aos-duration="2000" class="carrossel-depoimentos" >
+            <div class="depoimento-slide">
+                <div class="depoimento">
+                    <img src="{{url_for('static',filename='img/revendedor.jpg')}}" alt="Foto do Revendedor 1" class="foto-revendedor">
+                    <blockquote>"A Borsoi Gás é uma parceira incrível! O suporte e a qualidade dos produtos são excepcionais. Meus clientes sempre elogiam o serviço."</blockquote>
+                    <p class="nome-revendedor">João Silva</p>
+                    <p class="local-revendedor">Imperatriz, MA</p>
+                </div>
+            </div>
+            <div class="depoimento-slide">
+                <div class="depoimento">
+                    <img src="{{url_for('static',filename='img/revendedor.jpg')}}" alt="Foto do Revendedor 2" class="foto-revendedor">
+                    <blockquote>"Trabalhar com a Borsoi Gás melhorou significativamente meu negócio. A entrega pontual e o atendimento ao cliente são de primeira classe."</blockquote>
+                    <p class="nome-revendedor">Maria Santos</p>
+                    <p class="local-revendedor">Belém, PA</p>
+                </div>
+            </div>
+            <div class="depoimento-slide">
+                <div class="depoimento">
+                    <img src="{{url_for('static',filename='img/revendedor-2.jpg')}}" alt="Foto do Revendedor 3" class="foto-revendedor">
+                    <blockquote>"A confiabilidade da Borsoi Gás é incomparável. Isso me permite oferecer um serviço de qualidade aos meus clientes, sem preocupações."</blockquote>
+                    <p class="nome-revendedor">Carlos Oliveira</p>
+                    <p class="local-revendedor">São Luís, MA</p>
+                </div>
+            </div>
+        </div>
+        <div class="controles-carrossel">
+            <button class="btn-anterior">&lt;</button>
+            <button class="btn-proximo">&gt;</button>
+        </div>
+    </section>
+    
+{% endblock components %}
