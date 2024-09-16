@@ -174,16 +174,10 @@ def initialize_database():
                 db.session.add(conteudo_inicial)
                 db.session.commit()
                 logger.info("Initial home content created")
-            else:
-                # Adicionar a nova coluna se ela não existir
-                if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
-                    with db.engine.connect() as conn:
-                        conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
-                    db.session.commit()
-                    logger.info("Added new column to ConteudoHome table")
         except Exception as e:
             logger.error(f"Error initializing database: {str(e)}")
 
+# Chame a função de inicialização do banco de dados
 initialize_database()
 
 if __name__ == "__main__":
