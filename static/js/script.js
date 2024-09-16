@@ -31,15 +31,8 @@ $(document).ready(function() {
     }
 
     // Rolagem suave para links do menu principal e mobile
-    $('.menu-principal .sobre a, .menu-mobile ul li:nth-child(2) a').on('click', function(e) {
-        e.preventDefault();
-        scrollToSection('.opiniao-revendedores');
-        if ($menuMobile.is(':visible')) {
-            toggleMenu();
-        }
-    });
 
-    $('.menu-principal .contato a, .menu-mobile ul li:nth-child(3) a').on('click', function(e) {
+    $('.menu-principal .contato a, .menu-mobile ul li:nth-child(2) a').on('click', function(e) {
         e.preventDefault();
         scrollToSection('footer');
         if ($menuMobile.is(':visible')) {
