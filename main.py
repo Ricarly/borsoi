@@ -1,9 +1,13 @@
 import os
+import logging
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import text
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'projeto-borsoi')
@@ -11,6 +15,8 @@ app.config['STATIC_FOLDER'] = 'static'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
 if app.config['SQLALCHEMY_DATABASE_URI'].startswith("postgres://"):
     app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace("postgres://", "postgresql://", 1)
+
+logger.info(f"Using database: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -143,29 +149,37 @@ def admin_redirect():
 
 
 with app.app_context():
-    db.create_all()
-    # Criar usuário padrão se não existir
-    if not User.query.filter_by(username='admin').first():
-        default_user = User(username='admin')
-        default_user.set_password('senha123')
-        db.session.add(default_user)
-        db.session.commit()
-    
-    # Criar conteúdo inicial da página home se não existir
-    conteudo_home = ConteudoHome.query.first()
-    if not conteudo_home:
-        conteudo_inicial = ConteudoHome(
-            titulo="TROQUE",
-            subtitulo="SEU GÁS",
-            paragrafo="E GANHE UM BRINDE ESPECIAL",
-            texto_botao_fale_conosco="Clique aqui e fale conosco"
-        )
-        db.session.add(conteudo_inicial)
-        db.session.commit()
-    else:
-        # Adicionar a nova coluna se ela não existir
-        if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
-            with db.engine.connect() as conn:
-                conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
+    try:
+        db.create_all()
+        logger.info("Database tables created successfully")
+        
+        # Criar usuário padrão se não existir
+        if not User.query.filter_by(username='admin').first():
+            default_user = User(username='admin')
+            default_user.set_password('senha123')
+            db.session.add(default_user)
             db.session.commit()
+            logger.info("Default user created")
+        
+        # Criar conteúdo inicial da página home se não existir
+        conteudo_home = ConteudoHome.query.first()
+        if not conteudo_home:
+            conteudo_inicial = ConteudoHome(
+                titulo="TROQUE",
+                subtitulo="SEU GÁS",
+                paragrafo="E GANHE UM BRINDE ESPECIAL",
+                texto_botao_fale_conosco="Clique aqui e fale conosco"
+            )
+            db.session.add(conteudo_inicial)
+            db.session.commit()
+            logger.info("Initial home content created")
+        else:
+            # Adicionar a nova coluna se ela não existir
+            if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
+                with db.engine.connect() as conn:
+                    conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
+                db.session.commit()
+                logger.info("Added new column to ConteudoHome table")
+    except Exception as e:
+        logger.error(f"Error initializing database: {str(e)}")
 

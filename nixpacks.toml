@@ -1,16 +1,20 @@
 [phases.setup]
-nixPkgs = ['python310']
+nixPkgs = ['python312']
 
 [phases.install]
 cmds = [
   'python -m venv /opt/venv',
   '. /opt/venv/bin/activate',
   'pip install --upgrade pip',
+  'pip install wheel',
   'pip install -r requirements.txt'
 ]
 
 [start]
-cmd = 'gunicorn wsgi:app'
+cmd = 'gunicorn --bind 0.0.0.0:$PORT wsgi:app'
 
 [build]
 buildPhase = 'true'
+
+[variables]
+PYTHONUNBUFFERED = "1"
