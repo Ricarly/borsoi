@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -5,9 +6,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import text
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sua_chave_secreta_aqui'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'projeto-borsoi')
 app.config['STATIC_FOLDER'] = 'static'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+if app.config['SQLALCHEMY_DATABASE_URI'].startswith("postgres://"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace("postgres://", "postgresql://", 1)
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -167,5 +170,5 @@ if __name__ == '__main__':
                     conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
                 db.session.commit()
     
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
 
