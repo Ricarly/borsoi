@@ -148,38 +148,45 @@ def admin_redirect():
     return redirect(url_for('admin_dashboard'))
 
 
-with app.app_context():
-    try:
-        db.create_all()
-        logger.info("Database tables created successfully")
-        
-        # Criar usuário padrão se não existir
-        if not User.query.filter_by(username='admin').first():
-            default_user = User(username='admin')
-            default_user.set_password('senha123')
-            db.session.add(default_user)
-            db.session.commit()
-            logger.info("Default user created")
-        
-        # Criar conteúdo inicial da página home se não existir
-        conteudo_home = ConteudoHome.query.first()
-        if not conteudo_home:
-            conteudo_inicial = ConteudoHome(
-                titulo="TROQUE",
-                subtitulo="SEU GÁS",
-                paragrafo="E GANHE UM BRINDE ESPECIAL",
-                texto_botao_fale_conosco="Clique aqui e fale conosco"
-            )
-            db.session.add(conteudo_inicial)
-            db.session.commit()
-            logger.info("Initial home content created")
-        else:
-            # Adicionar a nova coluna se ela não existir
-            if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
-                with db.engine.connect() as conn:
-                    conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
+def initialize_database():
+    with app.app_context():
+        try:
+            db.create_all()
+            logger.info("Database tables created successfully")
+            
+            # Criar usuário padrão se não existir
+            if not User.query.filter_by(username='admin').first():
+                default_user = User(username='admin')
+                default_user.set_password('senha123')
+                db.session.add(default_user)
                 db.session.commit()
-                logger.info("Added new column to ConteudoHome table")
-    except Exception as e:
-        logger.error(f"Error initializing database: {str(e)}")
+                logger.info("Default user created")
+            
+            # Criar conteúdo inicial da página home se não existir
+            conteudo_home = ConteudoHome.query.first()
+            if not conteudo_home:
+                conteudo_inicial = ConteudoHome(
+                    titulo="TROQUE",
+                    subtitulo="SEU GÁS",
+                    paragrafo="E GANHE UM BRINDE ESPECIAL",
+                    texto_botao_fale_conosco="Clique aqui e fale conosco"
+                )
+                db.session.add(conteudo_inicial)
+                db.session.commit()
+                logger.info("Initial home content created")
+            else:
+                # Adicionar a nova coluna se ela não existir
+                if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
+                    with db.engine.connect() as conn:
+                        conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
+                    db.session.commit()
+                    logger.info("Added new column to ConteudoHome table")
+        except Exception as e:
+            logger.error(f"Error initializing database: {str(e)}")
+
+initialize_database()
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
