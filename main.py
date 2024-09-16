@@ -169,6 +169,3 @@ with app.app_context():
                 conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
             db.session.commit()
 
-
-app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
-
