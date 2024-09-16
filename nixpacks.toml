@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ["python3", "python3Packages.pip"]
+nixPkgs = ['python310']
 
 [phases.install]
-cmds = ["pip install -r requirements.txt"]
+cmds = ['python -m venv /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt']
 
 [start]
-cmd = "python main.py"
+cmd = 'gunicorn main:app'

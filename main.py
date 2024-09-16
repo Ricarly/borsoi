@@ -142,33 +142,33 @@ def admin_redirect():
     return redirect(url_for('admin_dashboard'))
 
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        # Criar usuário padrão se não existir
-        if not User.query.filter_by(username='admin').first():
-            default_user = User(username='admin')
-            default_user.set_password('senha123')
-            db.session.add(default_user)
-            db.session.commit()
-        
-        # Criar conteúdo inicial da página home se não existir
-        conteudo_home = ConteudoHome.query.first()
-        if not conteudo_home:
-            conteudo_inicial = ConteudoHome(
-                titulo="TROQUE",
-                subtitulo="SEU GÁS",
-                paragrafo="E GANHE UM BRINDE ESPECIAL",
-                texto_botao_fale_conosco="Clique aqui e fale conosco"
-            )
-            db.session.add(conteudo_inicial)
-            db.session.commit()
-        else:
-            # Adicionar a nova coluna se ela não existir
-            if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
-                with db.engine.connect() as conn:
-                    conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
-                db.session.commit()
+with app.app_context():
+    db.create_all()
+    # Criar usuário padrão se não existir
+    if not User.query.filter_by(username='admin').first():
+        default_user = User(username='admin')
+        default_user.set_password('senha123')
+        db.session.add(default_user)
+        db.session.commit()
     
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+    # Criar conteúdo inicial da página home se não existir
+    conteudo_home = ConteudoHome.query.first()
+    if not conteudo_home:
+        conteudo_inicial = ConteudoHome(
+            titulo="TROQUE",
+            subtitulo="SEU GÁS",
+            paragrafo="E GANHE UM BRINDE ESPECIAL",
+            texto_botao_fale_conosco="Clique aqui e fale conosco"
+        )
+        db.session.add(conteudo_inicial)
+        db.session.commit()
+    else:
+        # Adicionar a nova coluna se ela não existir
+        if not hasattr(conteudo_home, 'texto_botao_fale_conosco'):
+            with db.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE conteudo_home ADD COLUMN texto_botao_fale_conosco VARCHAR(100) NOT NULL DEFAULT 'Clique aqui e fale conosco'"))
+            db.session.commit()
+
+
+app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
 
