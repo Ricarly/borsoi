@@ -72,14 +72,13 @@
     {% include 'footer.html' %}
     <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
     <script src="{{url_for('static',filename='js/script.js')}}"></script>
-    <script src="{{url_for('static',filename='js/carousel.js')}}"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
 
         // Adicionar rastreamento de clique no botão "Fale Conosco"
         document.querySelector('.btn-fale-conosco').addEventListener('click', function() {
-            fbq('track', 'CTA');
+            fbq('trackCustom', 'CTA'); // Atualizado para trackCustom
         });
     </script>
 </body>
