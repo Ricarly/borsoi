@@ -80,6 +80,16 @@
         document.querySelector('.btn-fale-conosco').addEventListener('click', function() {
             fbq('trackCustom', 'CTA'); // Atualizado para trackCustom
         });
+
+        // Adicionar rastreamento de rolagem
+        window.addEventListener('scroll', function() {
+            var scrollDepth = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            gtag('event', 'scroll', {
+                'event_category': 'Scroll Depth',
+                'event_label': 'Scroll Depth',
+                'value': scrollDepth
+            });
+        });
     </script>
 </body>
 </html>
