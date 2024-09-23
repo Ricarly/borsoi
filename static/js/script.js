@@ -82,6 +82,10 @@ $(document).ready(function() {
     // Rastreamento de cliques no botão "Fale Conosco"
     $('.btn-fale-conosco').on('click', function() {
         fbq('track', 'Lead');
+        gtag('event', 'click', {
+            'event_category': 'Button',
+            'event_label': 'Fale Conosco'
+        });
     });
 
     // Adiciona efeito de toque para o botão "btn-chamada"
